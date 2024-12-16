@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תור חדש</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        }
+
+        body {
+            background: rgba(0,0,0,0.5);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            max-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            background: #64b5f6;
+            color: white;
+            padding: 16px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .close-btn {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+            scrollbar-width: thin;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #64b5f6;
+        }
+
+        .input-icon {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            color: #64b5f6;
+            font-size: 1.2rem;
+        }
+
+        .form-input {
+            flex: 1;
+            height: 46px;
+            padding: 0 12px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+        }
+
+        select.form-input {
+            appearance: none;
+            background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364b5f6'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 12px center;
+            padding-right: 35px;
+            cursor: pointer;
+        }
+
+        textarea.form-input {
+            height: 100px;
+            padding: 12px;
+            resize: none;
+        }
+
+        .notification-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 12px 0;
+        }
+
+        .custom-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #64b5f6;
+        }
+
+        .modal-footer {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            border-top: 1px solid #eee;
+            background: white;
+            position: sticky;
+            bottom: 0;
+            z-index: 1;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn {
+            flex: 1;
+            height: 46px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-save {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-cancel {
+            background: #5C6BC0;
+            color: white;
+        }
+
+        .section-title {
+            color: #1976d2;
+            font-size: 1.1rem;
+            margin: 20px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e3f2fd;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close-btn">×</button>
+            <div class="modal-title">תור חדש</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-save">שמור</button>
+            <button class="btn btn-cancel">סגור</button>
+        </div>
+        <div class="modal-body">
+            <!-- פרטי לקוח -->
+                <div class="form-group">
+                <label class="form-label">סוג תור:</label>
+                <div class="input-wrapper">
+                    <div class="input-icon">📋</div>
+                    <select class="form-input">
+                        <option value="">בחר סוג תור</option>
+                        <option>טיפול רגיל</option>
+                        <option>טיפול מורחב</option>
+                        <option>ייעוץ</option>
+                    </select>
+                </div>
+            <div class="form-group">
+                <label class="form-label">שם פרטי:</label>
+                <div class="input-wrapper">
+                    <div class="input-icon">👤</div>
+                    <input type="text" class="form-input" placeholder="הכנס שם פרטי">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">שם משפחה:</label>
+                <div class="input-wrapper">
+                    <div class="input-icon">👥</div>
+                    <input type="text" class="form-input" placeholder="הכנס שם משפחה">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">טלפון:</label>
+                <div class="input-wrapper">
+                    <div class="input-icon">📱</div>
+                    <input type="tel" class="form-input" placeholder="הכנס מספר טלפון">
+                </div>
+            </div>
+
+            <!-- פרטי תור -->
+            <div class="section-title">פרטי תור</div>
+
+ 
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">תאריך:</label>
+                <div class="input-wrapper">
+                    <div class="input-icon">📅</div>
+                    <input type="text" class="form-input" value="12/12/2024" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">משעה:</label>
+                <div class="input-wrapper">
+                    <div class="input-icon">⏰</div>
+                    <input type="text" class="form-input" value="12:30" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">עד שעה:</label>
+                <div class="input-wrapper">
+                    <div class="input-icon">⏰</div>
+                    <input type="text" class="form-input" value="13:00" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">הערות:</label>
+                <textarea class="form-input" placeholder="הוסף הערות..."></textarea>
+            </div>
+
+            <div class="notification-group">
+                <span>לשלוח הודעה?</span>
+                <input type="checkbox" class="custom-checkbox" checked>
+            </div>
+
+            <div class="notification-group">
+                <span>התראה</span>
+                <input type="checkbox" class="custom-checkbox">
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-save">שמור</button>
+            <button class="btn btn-cancel">סגור</button>
+        </div>
+    </div>
+
+    <script>
+        // שמירת טופס
+        document.querySelector('.btn-save').addEventListener('click', function() {
+            // אוסף את כל הנתונים
+            const formData = {
+                customer: {
+                    firstName: document.querySelector('input[placeholder="הכנס שם פרטי"]').value,
+                    lastName: document.querySelector('input[placeholder="הכנס שם משפחה"]').value,
+                    phone: document.querySelector('input[placeholder="הכנס מספר טלפון"]').value,
+                    id: Math.floor(1000 + Math.random() * 9000) // מספר לקוח רנדומלי
+                },
+                appointment: {
+                    type: document.querySelector('select').value,
+                    date: document.querySelector('input[value="12/12/2024"]').value,
+                    startTime: document.querySelector('input[value="12:30"]').value,
+                    endTime: document.querySelector('input[value="13:00"]').value,
+                    notes: document.querySelector('textarea').value,
+                    sendMessage: document.querySelector('.notification-group input').checked,
+                    reminder: document.querySelectorAll('.notification-group input')[1].checked
+                }
+            };
+            
+            console.log('נשמר:', formData);
+            // כאן מתבצעת שמירת הנתונים
+        });
+
+        // סגירת מודל
+        document.querySelector('.btn-cancel').addEventListener('click', function() {
+            console.log('המודל נסגר');
+            // כאן מתבצעת סגירת המודל
+        });
+
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            console.log('המודל נסגר');
+            // כאן מתבצעת סגירת המודל
+        });
+    </script>
+</body>
+</html>

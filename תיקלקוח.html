@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תיק לקוח</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+        }
+
+        .header {
+            background: #4a90e2;
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .main-content {
+            margin-top: 60px;
+            padding: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .client-header {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-section {
+            position: relative;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .phone-btn {
+            background: #1a237e;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.2rem;
+            border: none;
+            background: none;
+            color: #666;
+            white-space: nowrap;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: #1a237e;
+            font-weight: 500;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #1a237e;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-row:last-child {
+            border: none;
+        }
+
+        .info-label {
+            color: #666;
+        }
+
+        .info-value {
+            font-weight: 500;
+        }
+
+        .appointments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .appointment-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .documents-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .document-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #1a237e;
+        }
+
+        .section-title {
+            margin-bottom: 1rem;
+            color: #1a237e;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <button class="back-btn">=</button>
+            <h1>תיק לקוח</h1>
+            <div style="width: 24px;"></div>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="client-header">
+            <div>
+                <h2>ישראל ישראלי</h2>
+                <div style="color: #666;">מספר לקוח: #1234</div>
+            </div>
+            <div class="contact-section">
+                <a href="tel:+972501234567" class="phone-btn">📞</a>
+                <a href="https://wa.me/972501234567" class="whatsapp-btn">📱</a>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="details">פרטים</button>
+            <button class="tab-btn" data-tab="appointments">תורים</button>
+            <button class="tab-btn" data-tab="payments">תשלומים</button>
+            <button class="tab-btn" data-tab="documents">מסמכים</button>
+        </div>
+
+        <!-- פרטים -->
+        <div id="details" class="tab-content active">
+            <h3 class="section-title">פרטי התקשרות</h3>
+            <div class="info-row">
+                <span class="info-label">טלפון</span>
+                <span class="info-value">050-1234567</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">הערות</span>
+                <span class="info-value">לבקש ביקורת </span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">כתובת</span>
+                <span class="info-value">רחוב הרצל 1, תל אביב</span>
+            </div>
+        </div>
+
+        <!-- תורים -->
+        <div id="appointments" class="tab-content">
+            <h3 class="section-title">תורים קרובים</h3>
+            <div class="appointments-list">
+                <div class="appointment-card">
+                    <div style="font-weight: 500;">יום שני, 15/12/2024</div>
+                    <div style="color: #666;">10:00 - טיפול רגיל</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- מסמכים -->
+        <div id="documents" class="tab-content">
+            <h3 class="section-title">מסמכים</h3>
+            <div class="documents-list">
+                <div class="document-card">
+                    <div>
+                        <div style="font-weight: 500;">הצהרת בריאות</div>
+                        <div style="color: #666;">08/12/2024</div>
+                    </div>
+                    <div class="document-actions">
+                        <button class="action-btn">👁️</button>
+                        <button class="action-btn">📥</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = button.dataset.tab;
+                const content = document.getElementById(tabId);
+                content.classList.add('active');
+                
+                // Scroll to content
+                content.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

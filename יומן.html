@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יומן עבודה</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        .status-bar {
+            background: #78909c;
+            color: white;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4a90e2, #64b5f6);
+            color: white;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-bar {
+            background: white;
+            margin: 10px;
+            border-radius: 25px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            background: #64b5f6;
+            color: white;
+            font-size: 0.9rem;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .nav-button:hover {
+            background: #4a90e2;
+        }
+
+        .nav-button.settings {
+            background: #4a90e2;
+        }
+
+.days-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    /* שאר המאפיינים נשארים אותם דבר */
+    display: grid;
+    grid-template-columns: auto repeat(6, 1fr);
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    margin: 0 10px;
+
+        }
+
+        .day-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .day-number {
+            color: #4a90e2;
+            font-size: 1.0rem;
+            font-weight: bold;
+        }
+
+        .day-letter {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .calendar-container {
+            display: grid;
+            grid-template-columns: auto repeat(6, 1fr);
+            gap: 1px;
+            position: relative;
+            background: white;
+            margin: 0 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .time-column {
+            background: #fff;
+            text-align: center;
+            font-weight: bold;
+            border-left: 1px solid #e0e0e0;
+        }
+
+        .time-slot {
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grid-slot {
+            position: relative;
+            background: #fff;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-left: 1px solid #e0e0e0;
+        }
+
+        .add-button {
+            font-size:  14px;
+            color: #64b5f6;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-button:hover {
+            color: #4a90e2;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+    </div>
+
+    <div class="header">
+        <div style="display: flex; align-items: center;">
+            <button style="background: none; border: none; font-size: 1.5rem;">☰</button>
+            <span style="margin-right: 100px;">יומן עבודה</span>
+            <span style="margin-right: 10px; font-size: 20px;">📅</span>
+        </div>
+        <img src="/api/placeholder/32/32" alt="לוגו" style="width: 32px; height: 36px;">
+    </div>
+
+    <div class="nav-bar">
+        <button class="nav-button"><<</button>
+        <button class="nav-button">>></button>
+        <button class="nav-button">⬇</button>
+        <button class="nav-button">קפוץ</button>
+        <button class="nav-button settings">⚙</button>
+    </div>
+
+    <div class="days-header">
+        <div>דצמבר</div>
+        <div class="day-cell">
+            <div class="day-number">10</div>
+            <div class="day-letter">א'</div>
+        </div>
+        <div class="day-cell">
+            <div class="day-number">11</div>
+            <div class="day-letter">ב'</div>
+        </div>
+        <div class="day-cell">
+            <div class="day-number">12</div>
+            <div class="day-letter">ג'</div>
+        </div>
+        <div class="day-cell">
+            <div class="day-number">13</div>
+            <div class="day-letter">ד'</div>
+        </div>
+        <div class="day-cell">
+            <div class="day-number">14</div>
+            <div class="day-letter">ה'</div>
+        </div>
+        <div class="day-cell">
+            <div class="day-number">15</div>
+            <div class="day-letter">ו'</div>
+        </div>
+    </div>
+
+    <div class="calendar-container">
+        <div class="time-column">
+            <div class="time-slot">10:00</div>
+            <div class="time-slot">10:30</div>
+            <div class="time-slot">11:00</div>
+            <div class="time-slot">11:30</div>
+            <div class="time-slot">12:00</div>
+            <div class="time-slot">12:30</div>
+            <div class="time-slot">13:00</div>
+            <div class="time-slot">13:30</div>
+            <div class="time-slot">14:00</div>
+            <div class="time-slot">14:30</div>
+            <div class="time-slot">15:00</div>
+            <div class="time-slot">15:30</div>
+            <div class="time-slot">16:00</div>
+            <div class="time-slot">16:30</div>
+            <div class="time-slot">17:00</div>
+            <div class="time-slot">17:30</div>
+            <div class="time-slot">18:00</div>
+            <div class="time-slot">18:30</div>
+            <div class="time-slot">19:00</div>
+            <div class="time-slot">19:30</div>
+            <div class="time-slot">20:00</div>
+        </div>
+
+        <div class="day-column">
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+        </div>
+
+        <div class="day-column">
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+        </div>
+
+        <div class="day-column">
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+        </div>
+
+        <div class="day-column">
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+        </div>
+
+        <div class="day-column">
+            <div class="grid-slot"><button class="add-button        <div class="day-column">
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+        </div>
+
+        <div class="day-column">
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+            <div class="grid-slot"><button class="add-button">+</button></div>
+        </div>
+    </div>
+
+</body>
+</html>
